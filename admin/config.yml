@@ -2,7 +2,7 @@
 # >>> Het backend-blok hieronder vul je in met de gegevens uit DecapBridge (zie BEHEER.md). <<<
 backend:
   name: git-gateway
-  repo: tygolbrunenberg-ai/massage-woudenberg
+  repo: tbrunenberg/massage-woudenberg
   branch: main
   identity_url: "https://auth.decapbridge.com/sites/DECAPBRIDGE_SITE_ID"
   gateway_url: "https://gateway.decapbridge.com"
@@ -15,9 +15,9 @@ backend:
 locale: nl
 editor:
   preview: false
-site_url: https://tygolbrunenberg-ai.github.io/massage-woudenberg/
-display_url: https://tygolbrunenberg-ai.github.io/massage-woudenberg/
-logo_url: https://tygolbrunenberg-ai.github.io/massage-woudenberg/assets/img/logo.svg
+site_url: https://tbrunenberg.github.io/massage-woudenberg/
+display_url: https://tbrunenberg.github.io/massage-woudenberg/
+logo_url: https://tbrunenberg.github.io/massage-woudenberg/assets/img/logo.svg
 media_folder: assets/img/uploads
 public_folder: /assets/img/uploads
 collections:

@@ -31,15 +31,15 @@ python -m http.server -d dist 8000   # open http://localhost:8000
 ## Online zetten (eenmalig)
 1. **GitHub**: repository `massage-woudenberg` op het account van Tygo (openbaar; dat is nodig voor gratis GitHub Pages).
 2. **GitHub Pages**: Settings → Pages → Source: *GitHub Actions*. De site komt dan op
-   `https://tygolbrunenberg-ai.github.io/massage-woudenberg/`.
+   `https://tbrunenberg.github.io/massage-woudenberg/`.
 3. **Login (DecapBridge, gratis: 3 sites, 10 gebruikers per site)**:
    - Maak een account op decapbridge.com → *Create new site*.
-   - Git provider: GitHub, repo `tygolbrunenberg-ai/massage-woudenberg`, plus een fine-grained GitHub-token met alleen toegang tot deze repo (Contents: Read and write, Pull requests: Read and write).
+   - Git provider: GitHub, repo `tbrunenberg/massage-woudenberg`, plus een fine-grained GitHub-token met alleen toegang tot deze repo (Contents: Read and write, Pull requests: Read and write).
    - Decap CMS login URL: `https://<site>/admin/index.html`, auth type *Classic* (e-mail + wachtwoord).
    - Neem het `backend:`-blok dat DecapBridge geeft over in `admin/config.yml` (vervangt `REPO_PLACEHOLDER` / `DECAPBRIDGE_SITE_ID`) en vul `site_url`/`display_url` in.
    - Nodig Jaïrus uit via *Collaborators* (massagewoudenberg@gmail.com). Hij kiest zelf een wachtwoord.
    - Let op: het gratis account van DecapBridge telt 3 sites. Voor meer klanten kost Professional $9 per maand (check de actuele prijs).
-4. **Eigen domein** (later, op naam van de klant): Settings → Pages → Custom domain, en bij de domeinregistrar een CNAME naar `tygolbrunenberg-ai.github.io`. Zet daarna `site_url` en de login-URL in DecapBridge op het nieuwe domein.
+4. **Eigen domein** (later, op naam van de klant): Settings → Pages → Custom domain, en bij de domeinregistrar een CNAME naar `tbrunenberg.github.io`. Zet daarna `site_url` en de login-URL in DecapBridge op het nieuwe domein.
 
 Er staan geen wachtwoorden of tokens in deze repository. Het token staat alleen bij DecapBridge.
 
