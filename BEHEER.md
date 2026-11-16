@@ -24,7 +24,7 @@ python -m http.server -d dist 8000   # open http://localhost:8000
 - Reviews op de homepage (toevoegen en verwijderen)
 - Homepage: grote titel, introtekst, zin naast de foto
 - Per massage: alle teksten, labels, voordelen, de "let op"-opmerking
-- Nieuws: berichten toevoegen met datum, samenvatting en foto. Zodra er een bericht is, verschijnen de pagina Nieuws, een nieuwsblok op de homepage en een link in de footer. Zonder berichten zie je niets.
+- Nieuws staat uit voor Jaïrus (niet in het beheerscherm). De bouwer ondersteunt het nog wel: zet de collectie `nieuws` terug in `admin/config.yml` om het aan te zetten.
 
 **Niet via het beheerscherm** (vraag aan Tygo): nieuwe massages (daar hoort een eigen illustratie bij), de teksten van Wie ben ik, Intake, Cadeaubon, de "in de buurt"-pagina's, de voorwaarden en de privacyverklaring, en de opbouw of de vormgeving.
 

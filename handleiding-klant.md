@@ -10,9 +10,6 @@ Praktijk & tarieven → Tarieven. De prijs voor 30 en 60 minuten pas je hier é�
 ## Telefoonnummer, adres of e-mail
 Praktijk & tarieven → Praktijkgegevens. Dit verandert in het menu, op de knoppen, in de footer en op de contactpagina.
 
-## Een nieuwsbericht plaatsen
-Nieuws → Nieuw nieuwsbericht. Vul een titel, datum, korte samenvatting en de tekst in. Een foto is optioneel. Wil je het nog niet laten zien, zet dan "Nog niet publiceren" aan. Het nieuwste bericht komt vanzelf op de homepage. Gebruik dit bijvoorbeeld voor vakantiesluiting of een actie.
-
 ## Reviews op de homepage
 Praktijk & tarieven → Reviews. Neem echte reviews letterlijk over; drie staat het mooist. Werk ook het aantal reviews en de score bij onder Praktijkgegevens.
 
