@@ -13,6 +13,8 @@ backend:
     uploadMedia: "Foto geüpload \"{{path}}\""
     deleteMedia: "Foto verwijderd \"{{path}}\""
 locale: nl
+editor:
+  preview: false
 site_url: https://tygolbrunenberg-ai.github.io/massage-woudenberg/
 display_url: https://tygolbrunenberg-ai.github.io/massage-woudenberg/
 logo_url: https://tygolbrunenberg-ai.github.io/massage-woudenberg/assets/img/logo.svg
