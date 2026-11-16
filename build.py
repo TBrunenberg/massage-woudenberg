@@ -86,7 +86,34 @@ def main():
         open(os.path.join(DIST, 'nieuws.html'), 'w', encoding='utf-8').write(env.get_template('_nieuws/nieuws.html').render(**ctx))
         for n in ctx['nieuws']:
             open(os.path.join(DIST, n['url']), 'w', encoding='utf-8').write(env.get_template('_nieuws/bericht.html').render(n=n, **ctx))
+    demo()
     print('Gebouwd:', len(os.listdir(DIST)), 'items in dist/')
+
+def demo():
+    """Proefversie van het beheerscherm: echte inhoud, zonder inloggen, niets wordt opgeslagen."""
+    import json
+    cfg = yaml.safe_load(open(os.path.join(ROOT, 'admin', 'config.yml'), encoding='utf-8'))
+    cfg['backend'] = {'name': 'test-repo'}
+    cfg['load_config_file'] = False
+    cfg.pop('site_url', None); cfg.pop('display_url', None)
+    files = {}
+    for f in glob.glob(os.path.join(ROOT, 'content', '**', '*.*'), recursive=True):
+        parts = os.path.relpath(f, ROOT).replace(os.sep, '/').split('/')
+        node = files
+        for p in parts[:-1]: node = node.setdefault(p, {})
+        node[parts[-1]] = {'content': open(f, encoding='utf-8').read()}
+    html = f"""<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Proefversie beheer</title>
+<style>#demo-balk{{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#5b5e2a;color:#fff;font:14px/1.4 system-ui,sans-serif;padding:8px 16px;text-align:center}}</style>
+</head><body>
+<div id="demo-balk">Proefversie: kijk en probeer gerust, maar niets wordt opgeslagen of gepubliceerd.</div>
+<script>window.CMS_MANUAL_INIT = true; window.repoFiles = {json.dumps(files, ensure_ascii=False)};</script>
+<script src="https://unpkg.com/decap-cms@3.17.3/dist/decap-cms.js"></script>
+<script>CMS.init({{config: {json.dumps(cfg, ensure_ascii=False)}}});</script>
+</body></html>"""
+    os.makedirs(os.path.join(DIST, 'admin', 'demo'), exist_ok=True)
+    open(os.path.join(DIST, 'admin', 'demo', 'index.html'), 'w', encoding='utf-8').write(html)
 
 if __name__ == '__main__':
     main()
