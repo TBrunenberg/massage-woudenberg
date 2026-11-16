@@ -1,0 +1,25 @@
+prijs_30: 35,00
+prijs_60: 60,00
+titel: Tarieven
+slotwoord: '2026'
+intro: Eén tarief per tijdsduur, voor elke massage. Met een rittenkaart kom je voordeliger uit.
+rittenkaarten:
+- naam: Rittenkaart 5 × 30 minuten
+  aantal: 5 massages
+  prijs: 160,00
+- naam: Rittenkaart 10 × 30 minuten
+  aantal: 10 massages
+  prijs: 315,00
+- naam: Rittenkaart 5 × 60 minuten
+  aantal: 5 massages
+  prijs: 265,00
+- naam: Rittenkaart 10 × 60 minuten
+  aantal: 10 massages
+  prijs: 525,00
+informatie:
+- kop: Betalen
+  tekst: In de praktijk betaal je met pin of contant. Contant alleen gepast, er is geen wisselgeld aanwezig.
+- kop: Op locatie
+  tekst: Kun je niet naar de praktijk komen? Jaïrus masseert ook op locatie, ook stoelmassage. Prijzen op aanvraag.
+- kop: Body Flash
+  tekst: Sport je bij Body Flash in Woudenberg? Op vertoon van je polsband krijg je korting op een losse massage.

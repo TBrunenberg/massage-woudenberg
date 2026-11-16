@@ -1,0 +1,7 @@
+{% if nieuws %}<section class="sec-tight"><div class="wrap">
+  <div class="sec-head"><h2 class="t-l" data-split>Nieuws uit de <span class="serif">praktijk</span></h2><a class="link" href="nieuws.html" data-reveal>Al het nieuws</a></div>
+  <div class="contact-grid">{% for n in nieuws[:3] %}
+    <a class="c-card" href="{{ n.url }}" data-reveal style="--d:{{ loop.index0 * 100 }}ms"><span class="label">{{ n.datum_tekst }}</span><span class="v">{{ n.titel }}{% if n.slotwoord %} <span class="serif">{{ n.slotwoord }}</span>{% endif %}</span>{% if n.samenvatting %}<span class="muted">{{ n.samenvatting }}</span>{% endif %}</a>{% endfor %}
+  </div>
+</div></section>
+{% endif %}

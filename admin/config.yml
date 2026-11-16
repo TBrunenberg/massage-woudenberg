@@ -1,0 +1,699 @@
+# Beheerscherm Massage Woudenberg by Jaïrus (Decap CMS)
+# >>> Het backend-blok hieronder vul je in met de gegevens uit DecapBridge (zie BEHEER.md). <<<
+backend:
+  name: git-gateway
+  repo: tygolbrunenberg-ai/massage-woudenberg
+  branch: main
+  identity_url: "https://auth.decapbridge.com/sites/DECAPBRIDGE_SITE_ID"
+  gateway_url: "https://gateway.decapbridge.com"
+  commit_messages:
+    create: "Nieuw: {{collection}} \"{{slug}}\""
+    update: "Aangepast: {{collection}} \"{{slug}}\""
+    delete: "Verwijderd: {{collection}} \"{{slug}}\""
+    uploadMedia: "Foto geüpload \"{{path}}\""
+    deleteMedia: "Foto verwijderd \"{{path}}\""
+locale: nl
+site_url: https://tygolbrunenberg-ai.github.io/massage-woudenberg/
+display_url: https://tygolbrunenberg-ai.github.io/massage-woudenberg/
+logo_url: https://tygolbrunenberg-ai.github.io/massage-woudenberg/assets/img/logo.svg
+media_folder: assets/img/uploads
+public_folder: /assets/img/uploads
+collections:
+- name: nieuws
+  label: Nieuws
+  label_singular: Nieuwsbericht
+  folder: content/nieuws
+  create: true
+  delete: true
+  extension: md
+  format: frontmatter
+  slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+  summary: "{{datum | date('D-M-YYYY')}} · {{titel}}"
+  sortable_fields:
+  - datum
+  - titel
+  description: Berichten verschijnen op de pagina Nieuws, de nieuwste drie ook op de homepage. Zonder berichten is er geen nieuwspagina.
+  fields:
+  - name: titel
+    label: Titel
+    widget: string
+  - name: slotwoord
+    label: Slotwoord (optioneel, schuin)
+    widget: string
+    hint: Laatste woord van de titel in het sierlettertype. Mag leeg.
+    required: false
+  - name: datum
+    label: Datum
+    widget: datetime
+    date_format: D-M-YYYY
+    time_format: false
+    format: YYYY-MM-DD
+  - name: samenvatting
+    label: Korte samenvatting
+    widget: text
+    hint: Eén zin, zichtbaar in het overzicht.
+    required: false
+  - name: afbeelding
+    label: Foto (optioneel)
+    widget: image
+    required: false
+  - name: afbeelding_tekst
+    label: Omschrijving van de foto
+    widget: string
+    hint: Voor slechtzienden en Google, bijv. "Jaïrus in de praktijk".
+    required: false
+  - name: concept
+    label: Nog niet publiceren
+    widget: boolean
+    default: false
+    required: false
+    hint: Aan = bericht staat nog niet op de site.
+  - name: body
+    label: Bericht
+    widget: markdown
+    buttons:
+    - bold
+    - italic
+    - link
+    - heading-two
+    - heading-three
+    - bulleted-list
+    - numbered-list
+    editor_components: []
+- name: praktijk
+  label: Praktijk & tarieven
+  files:
+  - name: gegevens
+    label: Praktijkgegevens
+    file: content/praktijk.yml
+    description: Deze gegevens staan op elke pagina (menu, knoppen, footer).
+    fields:
+    - name: telefoon
+      label: Telefoonnummer
+      widget: string
+      hint: Schrijf als 06-12345678. De belknop past zich vanzelf aan.
+    - name: email
+      label: E-mailadres
+      widget: string
+    - name: straat
+      label: Straat en huisnummer
+      widget: string
+    - name: postcode_plaats
+      label: Postcode en plaats
+      widget: string
+      hint: De routeknop past zich vanzelf aan.
+    - name: reserveren_link
+      label: Link naar de reserveringskalender
+      widget: string
+      hint: Alleen wijzigen als de kalender verhuist.
+    - name: facebook
+      label: Facebook-link
+      widget: string
+    - name: instagram
+      label: Instagram-link
+      widget: string
+    - name: ervaring_jaren
+      label: Aantal jaren ervaring
+      widget: string
+      hint: Alleen het getal, bijv. 18.
+    - name: google_score
+      label: Google-score
+      widget: string
+      hint: Bijv. 4,9
+    - name: google_aantal
+      label: Aantal Google-reviews
+      widget: string
+      hint: Alleen het getal.
+    - name: reviews_stand
+      label: Stand van de reviews
+      widget: string
+      hint: Bijv. "december 2026".
+  - name: tarieven
+    label: Tarieven
+    file: content/tarieven.yml
+    description: De prijzen per tijdsduur staan op de homepage, de tarievenpagina en elke massagepagina.
+    fields:
+    - name: prijs_30
+      label: Prijs 30 minuten
+      widget: string
+      hint: In euro, bijv. 35,00
+    - name: prijs_60
+      label: Prijs 60 minuten
+      widget: string
+      hint: In euro, bijv. 60,00
+    - name: titel
+      label: Titel tarievenpagina
+      widget: string
+    - name: slotwoord
+      label: Slotwoord titel (schuin)
+      widget: string
+      hint: Bijv. het jaartal.
+    - name: intro
+      label: Introzin
+      widget: text
+    - name: rittenkaarten
+      label: Rittenkaarten
+      widget: list
+      summary: "{{fields.naam}} · € {{fields.prijs}}"
+      fields:
+      - name: naam
+        label: Naam
+        widget: string
+        hint: Bijv. Rittenkaart 5 × 30 minuten
+      - name: aantal
+        label: Aantal
+        widget: string
+        hint: Bijv. 5 massages
+      - name: prijs
+        label: Prijs
+        widget: string
+        hint: In euro, bijv. 160,00
+    - name: informatie
+      label: Informatieblokken
+      widget: list
+      summary: "{{fields.kop}}"
+      hint: De blokken onderaan de tarievenpagina.
+      fields:
+      - name: kop
+        label: Kopje
+        widget: string
+      - name: tekst
+        label: Tekst
+        widget: text
+  - name: reviews
+    label: Reviews (homepage)
+    file: content/reviews.yml
+    fields:
+    - name: reviews
+      label: Reviews
+      widget: list
+      summary: "{{fields.tekst}}"
+      hint: Gebruik alleen echte reviews, letterlijk overgenomen. Drie staat het mooist.
+      fields:
+      - name: tekst
+        label: Tekst van de review
+        widget: text
+        hint: Zonder aanhalingstekens, die komen er vanzelf omheen.
+      - name: bron
+        label: Bron
+        widget: string
+        default: Google-review
+  - name: home
+    label: Homepage (bovenaan)
+    file: content/home.yml
+    fields:
+    - name: titel
+      label: Grote titel (eerste deel)
+      widget: string
+    - name: slotwoord
+      label: Slotwoord titel (schuin)
+      widget: string
+    - name: intro
+      label: Introtekst
+      widget: text
+    - name: statement
+      label: Zin naast de foto van Jaïrus
+      widget: text
+    - name: statement_slot
+      label: Einde van die zin (schuin)
+      widget: string
+- name: massages
+  label: Massages
+  description: Teksten per massage. Nieuwe massages toevoegen of verwijderen kan niet hier (daar hoort een eigen illustratie bij).
+  files:
+  - name: anti_stress_massage
+    label: Anti-stressmassage
+    file: content/massages/anti-stress-massage.yml
+    fields:
+    - name: naam
+      label: Naam
+      widget: string
+      hint: Staat in het menu, op de kaart en in de paginatitel.
+    - name: menu_label
+      label: Korte toelichting in het menu
+      widget: string
+      hint: Bijv. "Rug" of "Spieren".
+    - name: kaart_tekst
+      label: Tekst op de kaart
+      widget: text
+      hint: Eén of twee zinnen op de overzichtskaart.
+    - name: kaart_labels
+      label: Labels op de kaart
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Meestal twee korte labels.
+    - name: titel
+      label: Paginatitel (eerste deel)
+      widget: string
+      hint: Bijv. "Sport".
+    - name: slotwoord
+      label: Paginatitel (slotwoord, schuin)
+      widget: string
+      hint: Bijv. "massage".
+    - name: intro
+      label: Introzin bovenaan
+      widget: text
+      hint: Wordt ook gebruikt voor Google.
+    - name: labels
+      label: Labels bovenaan de pagina
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+    - name: teksten
+      label: Alinea's onder "Wat je mag verwachten"
+      widget: list
+      min: 1
+      field:
+        name: alinea
+        label: Alinea
+        widget: text
+    - name: let_op
+      label: Let op (optioneel)
+      widget: text
+      hint: Laat leeg als er geen opmerking hoeft te staan.
+      required: false
+    - name: voordelen
+      label: De voordelen
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Ze worden automatisch genummerd.
+      min: 1
+    - name: slotzin
+      label: Slotzin
+      widget: text
+  - name: ontspanningsmassage
+    label: Ontspanningsmassage
+    file: content/massages/ontspanningsmassage.yml
+    fields:
+    - name: naam
+      label: Naam
+      widget: string
+      hint: Staat in het menu, op de kaart en in de paginatitel.
+    - name: menu_label
+      label: Korte toelichting in het menu
+      widget: string
+      hint: Bijv. "Rug" of "Spieren".
+    - name: kaart_tekst
+      label: Tekst op de kaart
+      widget: text
+      hint: Eén of twee zinnen op de overzichtskaart.
+    - name: kaart_labels
+      label: Labels op de kaart
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Meestal twee korte labels.
+    - name: titel
+      label: Paginatitel (eerste deel)
+      widget: string
+      hint: Bijv. "Sport".
+    - name: slotwoord
+      label: Paginatitel (slotwoord, schuin)
+      widget: string
+      hint: Bijv. "massage".
+    - name: intro
+      label: Introzin bovenaan
+      widget: text
+      hint: Wordt ook gebruikt voor Google.
+    - name: labels
+      label: Labels bovenaan de pagina
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+    - name: teksten
+      label: Alinea's onder "Wat je mag verwachten"
+      widget: list
+      min: 1
+      field:
+        name: alinea
+        label: Alinea
+        widget: text
+    - name: let_op
+      label: Let op (optioneel)
+      widget: text
+      hint: Laat leeg als er geen opmerking hoeft te staan.
+      required: false
+    - name: voordelen
+      label: De voordelen
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Ze worden automatisch genummerd.
+      min: 1
+    - name: slotzin
+      label: Slotzin
+      widget: text
+  - name: sportmassage
+    label: Sportmassage
+    file: content/massages/sportmassage.yml
+    fields:
+    - name: naam
+      label: Naam
+      widget: string
+      hint: Staat in het menu, op de kaart en in de paginatitel.
+    - name: menu_label
+      label: Korte toelichting in het menu
+      widget: string
+      hint: Bijv. "Rug" of "Spieren".
+    - name: kaart_tekst
+      label: Tekst op de kaart
+      widget: text
+      hint: Eén of twee zinnen op de overzichtskaart.
+    - name: kaart_labels
+      label: Labels op de kaart
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Meestal twee korte labels.
+    - name: titel
+      label: Paginatitel (eerste deel)
+      widget: string
+      hint: Bijv. "Sport".
+    - name: slotwoord
+      label: Paginatitel (slotwoord, schuin)
+      widget: string
+      hint: Bijv. "massage".
+    - name: intro
+      label: Introzin bovenaan
+      widget: text
+      hint: Wordt ook gebruikt voor Google.
+    - name: labels
+      label: Labels bovenaan de pagina
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+    - name: teksten
+      label: Alinea's onder "Wat je mag verwachten"
+      widget: list
+      min: 1
+      field:
+        name: alinea
+        label: Alinea
+        widget: text
+    - name: let_op
+      label: Let op (optioneel)
+      widget: text
+      hint: Laat leeg als er geen opmerking hoeft te staan.
+      required: false
+    - name: voordelen
+      label: De voordelen
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Ze worden automatisch genummerd.
+      min: 1
+    - name: slotzin
+      label: Slotzin
+      widget: text
+  - name: voetreflexmassage
+    label: Voetreflexmassage
+    file: content/massages/voetreflexmassage.yml
+    fields:
+    - name: naam
+      label: Naam
+      widget: string
+      hint: Staat in het menu, op de kaart en in de paginatitel.
+    - name: menu_label
+      label: Korte toelichting in het menu
+      widget: string
+      hint: Bijv. "Rug" of "Spieren".
+    - name: kaart_tekst
+      label: Tekst op de kaart
+      widget: text
+      hint: Eén of twee zinnen op de overzichtskaart.
+    - name: kaart_labels
+      label: Labels op de kaart
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Meestal twee korte labels.
+    - name: titel
+      label: Paginatitel (eerste deel)
+      widget: string
+      hint: Bijv. "Sport".
+    - name: slotwoord
+      label: Paginatitel (slotwoord, schuin)
+      widget: string
+      hint: Bijv. "massage".
+    - name: intro
+      label: Introzin bovenaan
+      widget: text
+      hint: Wordt ook gebruikt voor Google.
+    - name: labels
+      label: Labels bovenaan de pagina
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+    - name: teksten
+      label: Alinea's onder "Wat je mag verwachten"
+      widget: list
+      min: 1
+      field:
+        name: alinea
+        label: Alinea
+        widget: text
+    - name: let_op
+      label: Let op (optioneel)
+      widget: text
+      hint: Laat leeg als er geen opmerking hoeft te staan.
+      required: false
+    - name: voordelen
+      label: De voordelen
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Ze worden automatisch genummerd.
+      min: 1
+    - name: slotzin
+      label: Slotzin
+      widget: text
+  - name: hotstone_massage
+    label: Hotstone-massage
+    file: content/massages/hotstone-massage.yml
+    fields:
+    - name: naam
+      label: Naam
+      widget: string
+      hint: Staat in het menu, op de kaart en in de paginatitel.
+    - name: menu_label
+      label: Korte toelichting in het menu
+      widget: string
+      hint: Bijv. "Rug" of "Spieren".
+    - name: kaart_tekst
+      label: Tekst op de kaart
+      widget: text
+      hint: Eén of twee zinnen op de overzichtskaart.
+    - name: kaart_labels
+      label: Labels op de kaart
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Meestal twee korte labels.
+    - name: titel
+      label: Paginatitel (eerste deel)
+      widget: string
+      hint: Bijv. "Sport".
+    - name: slotwoord
+      label: Paginatitel (slotwoord, schuin)
+      widget: string
+      hint: Bijv. "massage".
+    - name: intro
+      label: Introzin bovenaan
+      widget: text
+      hint: Wordt ook gebruikt voor Google.
+    - name: labels
+      label: Labels bovenaan de pagina
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+    - name: teksten
+      label: Alinea's onder "Wat je mag verwachten"
+      widget: list
+      min: 1
+      field:
+        name: alinea
+        label: Alinea
+        widget: text
+    - name: let_op
+      label: Let op (optioneel)
+      widget: text
+      hint: Laat leeg als er geen opmerking hoeft te staan.
+      required: false
+    - name: voordelen
+      label: De voordelen
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Ze worden automatisch genummerd.
+      min: 1
+    - name: slotzin
+      label: Slotzin
+      widget: text
+  - name: cupping_massage
+    label: Wellness cupping massage
+    file: content/massages/cupping-massage.yml
+    fields:
+    - name: naam
+      label: Naam
+      widget: string
+      hint: Staat in het menu, op de kaart en in de paginatitel.
+    - name: menu_label
+      label: Korte toelichting in het menu
+      widget: string
+      hint: Bijv. "Rug" of "Spieren".
+    - name: kaart_tekst
+      label: Tekst op de kaart
+      widget: text
+      hint: Eén of twee zinnen op de overzichtskaart.
+    - name: kaart_labels
+      label: Labels op de kaart
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Meestal twee korte labels.
+    - name: titel
+      label: Paginatitel (eerste deel)
+      widget: string
+      hint: Bijv. "Sport".
+    - name: slotwoord
+      label: Paginatitel (slotwoord, schuin)
+      widget: string
+      hint: Bijv. "massage".
+    - name: intro
+      label: Introzin bovenaan
+      widget: text
+      hint: Wordt ook gebruikt voor Google.
+    - name: labels
+      label: Labels bovenaan de pagina
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+    - name: teksten
+      label: Alinea's onder "Wat je mag verwachten"
+      widget: list
+      min: 1
+      field:
+        name: alinea
+        label: Alinea
+        widget: text
+    - name: let_op
+      label: Let op (optioneel)
+      widget: text
+      hint: Laat leeg als er geen opmerking hoeft te staan.
+      required: false
+    - name: voordelen
+      label: De voordelen
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Ze worden automatisch genummerd.
+      min: 1
+    - name: slotzin
+      label: Slotzin
+      widget: text
+  - name: magnesium_massage
+    label: Magnesiummassage
+    file: content/massages/magnesium-massage.yml
+    fields:
+    - name: naam
+      label: Naam
+      widget: string
+      hint: Staat in het menu, op de kaart en in de paginatitel.
+    - name: menu_label
+      label: Korte toelichting in het menu
+      widget: string
+      hint: Bijv. "Rug" of "Spieren".
+    - name: kaart_tekst
+      label: Tekst op de kaart
+      widget: text
+      hint: Eén of twee zinnen op de overzichtskaart.
+    - name: kaart_labels
+      label: Labels op de kaart
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Meestal twee korte labels.
+    - name: titel
+      label: Paginatitel (eerste deel)
+      widget: string
+      hint: Bijv. "Sport".
+    - name: slotwoord
+      label: Paginatitel (slotwoord, schuin)
+      widget: string
+      hint: Bijv. "massage".
+    - name: intro
+      label: Introzin bovenaan
+      widget: text
+      hint: Wordt ook gebruikt voor Google.
+    - name: labels
+      label: Labels bovenaan de pagina
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+    - name: teksten
+      label: Alinea's onder "Wat je mag verwachten"
+      widget: list
+      min: 1
+      field:
+        name: alinea
+        label: Alinea
+        widget: text
+    - name: let_op
+      label: Let op (optioneel)
+      widget: text
+      hint: Laat leeg als er geen opmerking hoeft te staan.
+      required: false
+    - name: voordelen
+      label: De voordelen
+      widget: list
+      field:
+        name: item
+        label: Tekst
+        widget: string
+      hint: Ze worden automatisch genummerd.
+      min: 1
+    - name: slotzin
+      label: Slotzin
+      widget: text
