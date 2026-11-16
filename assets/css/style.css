@@ -371,3 +371,14 @@ a.c-card:hover{transform:translateY(-4px);box-shadow:0 0 0 1px var(--line),0 24p
 .gallery{display:grid;grid-template-columns:.75fr 1.25fr;gap:18px}
 .gallery .frame{height:clamp(320px,54vh,580px)}
 @media (max-width:700px){.gallery{grid-template-columns:1fr}.gallery .frame{height:clamp(260px,60vw,420px)}}
+
+/* --- Fixes 16-11-2026: mobiele uitlijning massagekaarten, cirkel om het reviewcijfer --- */
+.mgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1000px){.mgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.mgrid{grid-template-columns:minmax(0,1fr)}}
+.mgrid>div{min-width:0}
+.mgrid .mcard{width:100%;min-width:0}
+.mcard .visual svg{max-width:100%}
+.score .big .hand{left:-13%;top:-16%;width:126%;height:130%;max-width:none}
+.score .big .hand path.dr{transition:stroke-dashoffset 1.9s cubic-bezier(.65,0,.35,1) .35s}
+@media (max-width:520px){.c-card .v{font-size:1.12rem;word-break:normal;overflow-wrap:anywhere}}
